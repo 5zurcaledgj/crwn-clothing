@@ -5,5 +5,10 @@
   "emmet.triggerExpansionOnTab": true,
   "emmet.syntaxProfiles": {
     "javascript": "jsx"
+  },
+  "folders": [],
+  "settings": {},
+  "[javascript]": {
+    "editor.formatOnSave": true
   }
 }
