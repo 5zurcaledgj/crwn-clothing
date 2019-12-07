@@ -1,6 +1,6 @@
 {
   "emmet.includeLanguages": {
-     "javascript": "javascriptreact"
+    "javascript": "javascriptreact"
   },
   "emmet.triggerExpansionOnTab": true,
   "emmet.syntaxProfiles": {
@@ -10,5 +10,8 @@
   "settings": {},
   "[javascript]": {
     "editor.formatOnSave": true
-  }
+  },
+  "singleQuote": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true
 }
