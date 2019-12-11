@@ -41,6 +41,25 @@ export const createUserProfileDocumnet = async (userAuth, additionalData) => {
   return userRef;
 };
 
+export const convertCollectionsSnapshopToMap = collections => {
+  const transformedCollections = collections.docs.map(doc => {
+    const { title, items } = doc.data();
+
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items
+    };
+  });
+
+  return transformedCollections.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+
+    return accumulator;
+  }, {});
+};
+
 // Get the Auth service for the default app
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
