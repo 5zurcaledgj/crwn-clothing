@@ -41,6 +41,22 @@ export const createUserProfileDocumnet = async (userAuth, additionalData) => {
   return userRef;
 };
 
+export const createCollectionAndDocument = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const collectionRef = firestore.collection("collectionKey");
+
+  //Batch Write
+  const batch = firestore.batch();
+  objectsToAdd.forEach(obj => {
+    const newDocRef = collectionRef.doc(); //create new document and randomly generates a key
+    batch.set(newDocRef, obj);
+  });
+
+  return await batch.commit(); //fire off our batch request, returns a promise
+};
+
 // Get the Auth service for the default app
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
