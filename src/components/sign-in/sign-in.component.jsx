@@ -18,7 +18,6 @@ class SignIn extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     const { email, password } = this.state;
-    console.log(email, password);
     try {
       await auth.signInWithEmailAndPassword(email, password);
       this.setState({ email: "", password: "" });
