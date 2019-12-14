@@ -12,11 +12,15 @@ import CheckoutPage from "./pages/checkout/checkout.component.jsx";
 import Header from "./components/header/header.component";
 
 import { selectCurrentUser } from "./redux/user-reducer/user.selector";
+import { checkIfSignedIn } from "./redux/user-reducer/user.actions";
 
 class App extends Component {
   unsubscribeFromAuth = null;
 
-  componentDidMount() {}
+  componentDidMount() {
+    const { checkIfSignedIn } = this.props;
+    checkIfSignedIn();
+  }
 
   componentWillUnmount() {
     this.unsubscribeFromAuth();
@@ -47,4 +51,8 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => ({
+  checkIfSignedIn: () => dispatch(checkIfSignedIn())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

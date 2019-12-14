@@ -60,6 +60,15 @@ export const convertCollectionsSnapshopToMap = collections => {
   }, {});
 };
 
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(userAuth => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
+};
+
 // Get the Auth service for the default app
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
