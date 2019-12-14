@@ -65,8 +65,8 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 //Set up google authentication untility
-const provider = new firebase.auth.GoogleAuthProvider(); //gives access to google auth provider class from auth object
-provider.setCustomParameters({ prompt: "select_account" });
+export const googleProvider = new firebase.auth.GoogleAuthProvider(); //gives access to google auth provider class from auth object
+googleProvider.setCustomParameters({ prompt: "select_account" });
+export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
 export default firebase;
