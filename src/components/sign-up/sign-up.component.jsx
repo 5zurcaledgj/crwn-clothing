@@ -1,25 +1,19 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
-import {
-  auth,
-  createUserProfileDocumnet
-} from "./../../firebase/firebase.utils";
+import { signUpStart } from "../../redux/user/user.actions";
 
 import "./sign-up.styles.scss";
 
 class SignUp extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: ""
-    };
-  }
+  state = {
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  };
 
   handleChange = e => {
     const { value, name } = e.target;
@@ -36,24 +30,15 @@ class SignUp extends Component {
       return;
     }
 
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
+    const { signUp } = this.props;
+    signUp({ name, email, password });
 
-      await createUserProfileDocumnet(user, { displayName: name });
-
-      //after creating a profiile, reset our state
-      this.setState({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: ""
-      });
-    } catch (error) {
-      console.log("Error in creating user", error);
-    }
+    this.setState({
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: ""
+    });
   };
 
   render() {
@@ -103,4 +88,8 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+const mapDispatchToProps = dispatch => ({
+  signUp: userData => dispatch(signUpStart(userData))
+});
+
+export default connect(null, mapDispatchToProps)(SignUp);
